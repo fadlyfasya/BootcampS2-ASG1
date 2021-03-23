@@ -2,12 +2,12 @@
 #include <string.h>
 #include <stdlib.h>
 
-// 2. Given a linked list, determine whether it has a cycle. 
+// 3. Find the middle element of a linked list.
 
 struct Node{
     int value;
     Node *next;
-} *head, *tail, *head1, *tail1;
+} *head, *tail;
 
 Node *createNode(int value){
     Node *newNode = (Node*)malloc(sizeof(Node));
@@ -16,7 +16,7 @@ Node *createNode(int value){
     return newNode;
 }
 
-void pushHead(const char *name, int value){
+void pushHead(int value){
     Node *temp = createNode(value);
     if(!head){
         head = tail = temp;
@@ -35,18 +35,6 @@ void pushTail(int value){
     else{
         tail->next = temp;
         tail = temp;
-    }  
-}
-
-void pushTailCycle(int value){
-    Node *temp = createNode(value);
-    if(!head1){
-        head1 = tail1 = temp;
-    }
-    else{
-        tail1->next = temp;
-        tail1 = temp;
-        temp->next = head1;
     }  
 }
 
@@ -94,15 +82,6 @@ void printLinkedList(){
     puts("NULL");
 }
 
-void printLinkedListCycle(){
-    Node *curr = head1;
-    printf("(head) ");
-    do{
-        printf("%d -> ", curr->value);
-        curr = curr->next;
-    }while(curr != head1);
-    printf("%d (Head)\n", curr->value);
-}
 
 
 int main(){
@@ -112,32 +91,25 @@ int main(){
     pushTail(9);
     pushTail(10);
     pushTail(22);
+    pushTail(24);
+
+    printLinkedList();
     
-
-    pushTailCycle(1);
-    pushTailCycle(2);
-    pushTailCycle(3);
-    pushTailCycle(4);
-    pushTailCycle(5);
-
-    // printLinkedList();
-    // printLinkedListCycle();
-
-    if(tail1->next == head1){
-        puts("This linked list is a cycle");
-    }
-    else if(tail1 ->next == NULL){
-        puts("This linked list is NOT a cycle");
+    Node *curr = head;
+    int count = 0;
+    while(curr){
+        count++;
+        curr = curr->next;
     }
 
-    if(tail->next == head){
-        puts("This linked list is a cycle");
-    }
-    else if(tail ->next == NULL){
-        puts("This linked list is NOT a cycle");
+    curr = head;
+    count = count / 2;
+    while(count!=1){
+        count--;
+        curr = curr->next;
     }
 
-
+    printf("The middle element of the linked list is %d\n", curr->value);
 
     return 0;
 }
