@@ -112,23 +112,34 @@ void printLinkedList(){
 int main(){
     
     pushTail(1);
+    pushTail(1);
+    pushTail(1);
+    pushTail(8);
+    pushTail(9);
+    pushTail(11);
+    pushTail(11);
+    pushTail(30);
+    pushTail(30);
+    pushTail(30);
     pushTail(30);
     pushTail(31);
     pushTail(31);
     pushTail(31);
     pushTail(31);
+    pushTail(32);
+    
 
 
     printLinkedList();
     
 
     Node *curr = head;
-    Node *temp = head->next;
-    while(curr->next != tail){
+    Node *temp = curr->next;
+    while(temp != NULL){
         if(curr->value == temp->value){
             popMid(curr->value);
         }
-        curr = curr->next;
+        curr = temp;
         temp = temp->next;
     }
     printLinkedList();
